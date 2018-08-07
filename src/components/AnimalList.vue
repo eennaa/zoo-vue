@@ -1,12 +1,23 @@
 <template>
   <div>
+
+      <form @submit.prevent >
+        <label>Species</label>
+        <input v-model="newAnimal.species" type="text" placeholder="species" > <br>
+        <label>Name</label>
+        <input v-model="newAnimal.name" type="text" placeholder="name"> <br>
+        <label>Date of birth</label>
+        <input v-model="newAnimal.dateOfBirth" type="text" placeholder="dateOfBirth"> <br>
+        <button @click="addAnimal">Add animal</button> <br> <br>
+      </form>
+
       <table border=1 align="center">
         <thead>
           <th>Species</th>
           <th>Name</th>
           <th>Date of Birth</th>
-          <th></th>
-          <th></th>
+          <!-- <th></th>
+          <th></th> -->
         </thead>
         <tbody>
           <tr v-for="(animal,index) in animals" :key="index" >            
@@ -15,7 +26,10 @@
             <td v-if= "animal.dateOfBirth"> {{animal.dateOfBirth}} </td>
             <td v-else> {{ nonexistent }} </td>
             <th> <button @click="removeAnimal(animal)"> Remove</button> </th>
-            <th> <button @click="moveToTopAnimal(animal)"> Move to top</button> </th>
+            <th v-if="animals.indexOf(animal) !== 0"> 
+              <button @click="moveToTopAnimal(animal)"> Move to top</button> 
+            </th>
+            <!-- <th v-else></th> -->
           </tr>
         </tbody>
       </table>
@@ -36,7 +50,8 @@ export default {
         {species: "Mouse", name: "Gricko", dateOfBirth: "30/04/2015"},
         {species: "Zebra", name: "Zaza", dateOfBirth: "22/11/2008"},
         {species: "Test", name: "Zivotinja", dateOfBirth: ""},
-      ]      
+      ],
+      newAnimal: {}      
     };
   },
   methods: {
@@ -50,7 +65,14 @@ export default {
       this.removeAnimal(animal);
       this.animals.unshift(animal);
       
-    }
+    },
+
+    addAnimal(){
+      // console.log(this.newAnimal);
+      this.animals.push(this.newAnimal);
+      this.newAnimal = {};
+    },
+
   },
 }
 </script>
