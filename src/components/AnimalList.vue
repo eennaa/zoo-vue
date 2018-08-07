@@ -40,6 +40,21 @@
           </tr>
         </tbody>
       </table>
+
+      <table border=1>
+        <thead>
+          <th>Status</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr v-for="(sector, index) in sectors" :key="index">
+            <td>{{ sector.name }}</td>
+            <td>
+              <button @click="showAlert">Show Animal list</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
    
   </div>
 </template>
@@ -87,6 +102,10 @@ export default {
       this.newAnimal = {};
     },
 
+    showAlert(){
+      
+      alert("hi");
+    },
   },
 }
 </script>
