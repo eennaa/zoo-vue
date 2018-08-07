@@ -7,7 +7,7 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import AnimalList from './components/AnimalList.vue'
-console.log("AnimalList") 
+
 
 export default {
   name: 'app',
