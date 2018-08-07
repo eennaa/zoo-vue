@@ -9,7 +9,9 @@
         <label>Date of birth</label>
         <input v-model="newAnimal.dateOfBirth" type="text" placeholder="dateOfBirth"> <br>
         <label>Status</label>
-        <input v-model="newAnimal.sectors"> <br>
+        <select v-model="newAnimal.sector">
+            <option v-for="(sector,index) in sectors" :key="index" :value="sector"> {{ sector.name}} </option>
+        </select><br>
         <button @click="addAnimal">Add animal</button> <br> <br>
       </form>
 
