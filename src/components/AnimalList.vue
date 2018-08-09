@@ -32,11 +32,11 @@
             <td v-else> {{ nonexistent }} </td>  //// radi ali moze i u jednom redu-->
             <td>{{ animal.dateOfBirth ? animal.dateOfBirth : nonexistent }}</td>
             <td> {{ animal.sector.name }} </td>
-            <th> <button @click="removeAnimal(animal)"> Remove</button> </th>
-            <th v-if="animals.indexOf(animal) !== 0"> 
+            <td> <button @click="removeAnimal(animal)"> Remove</button> </td>
+            <td v-if="animals.indexOf(animal) !== 0"> 
               <button @click="moveToTopAnimal(animal)"> Move to top</button> 
-            </th>
-            <th v-else></th>
+            </td>
+            <td v-else></td>
           </tr>
         </tbody>
       </table>
@@ -50,7 +50,7 @@
           <tr v-for="(sector, index) in sectors" :key="index">
             <td>{{ sector.name }}</td>
             <td>
-              <button @click="showAlert">Show Animal list</button>
+              <button @click="showAlert(sector.name)">Show Animal list</button>
             </td>
           </tr>
         </tbody>
@@ -61,13 +61,16 @@
 
 <script>
 const unknown = "Unknown";
+
 const sectors =[
   {name: "Domestic"},
   {name: "Wild"}, 
   {name: unknown}  
 ]
+
 export default {
   name: 'AnimalList',
+
   data() {
     return {
       nonexistent: unknown,
@@ -80,9 +83,11 @@ export default {
         {species: "Test", name: "Zivotinja", dateOfBirth: "", sector:sectors[2]}
       ],
       newAnimal: {}   ,
-      sectors: sectors   
+      sectors: sectors,
+      belongsToSector: []   
     };
   },
+
   methods: {
     removeAnimal(animal){
       // console.log(this.animals.indexOf(animal));
@@ -102,9 +107,21 @@ export default {
       this.newAnimal = {};
     },
 
-    showAlert(){
+    showAlert(sectorBelonging){      
+      this.animals.forEach(animal => {
+        let sectorOfAnimal = animal.sector.name;
+        if(sectorOfAnimal === sectorBelonging){
+          let nameOfAnimal = animal.name;
+          this.belongsToSector.push(nameOfAnimal);
+        } 
+      });      
+      if (this.belongsToSector == "") {
+        alert("There is no animal with this status");
+      } else {
+        alert(this.belongsToSector);
+      }
       
-      alert("hi");
+      this.belongsToSector = [];
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AnimalList/>
+    <AnimalList/>    
   </div>
 </template>
 
